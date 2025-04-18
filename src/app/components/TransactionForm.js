@@ -1,27 +1,49 @@
 "use client";
 
 import api from "@/lib/axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
+const categories = [
+  "Groceries",
+  "Transport",
+  "Personal Care",
+  "Shopping",
+  "Saving or Investment",
+  "Healthcare",
+  "Entertainment",
+  "Other",
+];
 
 export default function TransactionForm({
   fetchTransactions,
   editingTransaction,
   clearEdit,
 }) {
-  const [amount, setAmount] = useState(editingTransaction?.amount || "");
-  const [description, setDescription] = useState(
-    editingTransaction?.description || ""
-  );
-  const [date, setDate] = useState(
-    editingTransaction?.date?.slice(0, 10) || ""
-  );
+  const [amount, setAmount] = useState("");
+  const [description, setDescription] = useState("");
+  const [date, setDate] = useState("");
+  const [category, setCategory] = useState("Shopping");
+
+  useEffect(() => {
+    if (editingTransaction) {
+      setAmount(editingTransaction.amount || "");
+      setDescription(editingTransaction.description || "");
+      setDate(editingTransaction.date?.slice(0, 10) || "");
+      setCategory(editingTransaction.category || "Shopping");
+    }
+  }, [editingTransaction]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!amount || !description || !date)
       return alert("All fields are required");
 
-    const newTransaction = { amount: Number(amount), description, date };
+    const newTransaction = {
+      amount: Number(amount),
+      description,
+      date,
+      category: category || "Shopping",
+    };
 
     if (editingTransaction) {
       await api.put(`/transactions/${editingTransaction._id}`, newTransaction);
@@ -33,6 +55,7 @@ export default function TransactionForm({
     setAmount("");
     setDescription("");
     setDate("");
+    setCategory("Shopping");
     fetchTransactions();
   };
 
@@ -67,6 +90,20 @@ export default function TransactionForm({
           value={date}
           onChange={(e) => setDate(e.target.value)}
         />
+      </div>
+      <div>
+        <label className="block text-sm font-medium">Category</label>
+        <select
+          className="border px-3 py-2 w-full"
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+        >
+          {categories.map((cat) => (
+            <option key={cat} value={cat}>
+              {cat}
+            </option>
+          ))}
+        </select>
       </div>
       <button
         type="submit"

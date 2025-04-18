@@ -26,8 +26,12 @@ export default function TransactionList({
             >
               <div>
                 <p className="font-medium">{tx.description}</p>
-                <p className="text-sm text-gray-600">
-                  ₹{tx.amount} • {new Date(tx.date).toLocaleDateString()}
+                <p className="text-sm text-gray-600 flex flex-row w-100 items-center">
+                  <span className="flex-1/3 text-cyan-600 p-2">
+                    ₹{tx.amount}
+                  </span>
+                  <span className="flex-1/3 text-cyan-300">{tx.category}</span>
+                  <span> {new Date(tx.date).toLocaleDateString()} </span>
                 </p>
               </div>
               <div className="space-x-2">

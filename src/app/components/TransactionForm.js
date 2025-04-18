@@ -39,7 +39,7 @@ export default function TransactionForm({
   return (
     <form
       onSubmit={handleSubmit}
-      className="space-y-4 p-4 bg-white rounded shadow mb-6"
+      className="space-y-4 p-4 bg-white rounded-lg shadow mb-6 text-black"
     >
       <div>
         <label className="block text-sm font-medium">Amount</label>

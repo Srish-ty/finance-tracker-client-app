@@ -1,40 +1,14 @@
 "use client";
 
-import ExpenseChart from "./components/ExpenseChart";
-import TransactionForm from "./components/TransactionForm";
-import TransactionList from "./components/TransactionList";
-import api from "@/lib/axios";
-import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
-export default function HomePage() {
-  const [transactions, setTransactions] = useState([]);
-  const [editingTransaction, setEditingTransaction] = useState(null);
-
-  const fetchTransactions = async () => {
-    const res = await api.get("/transactions");
-    setTransactions(res.data);
-  };
-
-  const clearEdit = () => setEditingTransaction(null);
+export default function HomeRedirect() {
+  const router = useRouter();
 
   useEffect(() => {
-    fetchTransactions();
+    router.push("/dashboard");
   }, []);
 
-  return (
-    <main className="max-w-3xl mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-6">Personal Finance Tracker</h1>
-      <TransactionForm
-        fetchTransactions={fetchTransactions}
-        editingTransaction={editingTransaction}
-        clearEdit={clearEdit}
-      />
-      <TransactionList
-        transactions={transactions}
-        fetchTransactions={fetchTransactions}
-        setEditingTransaction={setEditingTransaction}
-      />
-      <ExpenseChart transactions={transactions} />
-    </main>
-  );
+  return null;
 }

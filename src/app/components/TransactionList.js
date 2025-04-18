@@ -13,7 +13,7 @@ export default function TransactionList({
   };
 
   return (
-    <div className="bg-white p-4 rounded shadow">
+    <div className="bg-[#ffffffcc] backdrop-blur-md p-4 rounded-xl shadow-md text-black">
       <h2 className="text-lg font-semibold mb-4">Transactions</h2>
       {transactions.length === 0 ? (
         <p>No transactions yet.</p>

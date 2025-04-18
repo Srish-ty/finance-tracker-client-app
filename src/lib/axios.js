@@ -1,7 +1,7 @@
-import axios from 'axios';
+import axios from "axios";
 
 const api = axios.create({
-  baseURL: 'http://localhost:5000/api',
+  baseURL: "https://finance-tracker-server-n2yh.onrender.com/api",
 });
 
 export default api;

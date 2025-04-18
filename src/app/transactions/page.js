@@ -34,7 +34,8 @@ export default function TransactionsPage() {
         fetchTransactions={fetchTransactions}
         setEditingTransaction={setEditingTransaction}
       />
-      <ExpenseChart transactions={transactions} />
+      {/* {
+      <ExpenseChart transactions={transactions} />} */}
     </main>
   );
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import CategoryPieChart from "../components/CategoryPieChart";
+import ExpenseChart from "../components/ExpenseChart";
 import SummaryCards from "../components/SummaryCards";
 import api from "@/lib/axios";
 import { useEffect, useState } from "react";
@@ -21,6 +22,7 @@ export default function Dashboard() {
       <h1 className="text-2xl font-bold mb-6">Dashboard</h1>
       <SummaryCards transactions={transactions} />
       <CategoryPieChart transactions={transactions} />
+      <ExpenseChart transactions={transactions} />
     </main>
   );
 }
